@@ -1,0 +1,21 @@
+//Enemy.c
+void SpawnEnemy1 (void);
+void MoveEnemy (void);
+void DeleteEnemy(void);
+void SpawnEnemy2 (void);
+void MoveEnemy2 (void);
+void DeleteEnemy2 (void);
+void SpawnEnemy3 (void);
+void MoveEnemy3 (void);
+void DeleteEnemy3 (void);
+void HitDetection(void);
+void HitDetection2(void);
+void PlayerCollision(void);
+void ArmEnemies(void);
+void FireAway(void);
+void BossDetection1(void);
+void BossDetection2(void);
+void MeteorDraw(void);
+void MeteorMove(void);
+void MeteorDelete(void);
+void Destroy(void);
