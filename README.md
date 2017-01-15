@@ -12,12 +12,12 @@ General Gameplay Description:
 - After a certain amount of time a boss fight will trigger - defeating the boss ends the mini game
   
 Implementation of Game Mechanics:  
-- Three tiers of enemies existed as well as a boss enemy, each spawning at different intervals controlled by SysTick_Timer which ran at a rate of 80MHz  
+- System clock ran at 80MHz  
+- Three tiers of enemies existed as well as a boss enemy, each spawning at different intervals controlled by Timer2A  
 - No memory heap was used therefore only a set amount of enemies could exist at a time. Different enemy types were represented as different structs  
-- SysTick_Timer also controlled the rate at which enemies attacked and moved
-- Enemy attacks were treated as structs as well, and moved accordingly to SysTick_Timer
-- All enemies and enemy attacks had hitboxes that determined whether the player's attacks hit them and whether they hit the player character or not 
-This was done using pixel math based on the (x, y) positions of the various game objects  
+- Timer2A also controlled the rate at which enemies attacked and moved
+- Enemy attacks were treated as structs as well, and moved accordingly to Timer2A
+- All enemies and enemy attacks had hitboxes that determined whether the player's attacks hit them and whether they hit the player character or not using pixel math based on the (x, y) positions of the various game objects  
 - All characters and their various attacks were represented with sprites which were output to the attached LCD at their appropriate pixel 
 positions on the screen 
 
@@ -36,12 +36,12 @@ Controls:
 - Player character movement is dictated by the usage of a joystick which is treated as a two channel analog to digital converter in the software (assigned to PortE4 and PortE5 of the Launchpad)  
 - The joystick adc sampling was done at 125K samples/second and was handled by the Timer0A interrupt service routine 
 - The joystick used for my first deployment of the code was a SainSmart UNO 2560 R3 STM32 A072 (can be found here: https://www.amazon.com/gp/product/B00CO2N18A/ref=oh_aui_search_detailpage?ie=UTF8&psc=1)
-- 3x basic switches/buttons - assigned to each of the player attacks (mapped to PortD0 - PortD2)
+- 3x basic switches/buttons - assigned to each of the player attacks (mapped to PortD0 - PortD2) and read via SysTick_Timer's ISR
   
 Sound:  
 - Loops a six second sample of Silent Ensemble from Touhou composed by ZUN
 - Music was edited and trimmed to a 6s .wav file then ran through a MatLab conversion program to generate its corresponding values in a char array
-- The background music was outputted to an 8-bit binary weighted DAC using multiple resistors in parallel and series  
+- The background music was outputted to an 8-bit binary weighted DAC using multiple resistors in parallel and series at the correct tempo controlled by Timer1A's interrupt service routine  
   
 Additional Credit:  
 - ZUN - composer of BGM  
